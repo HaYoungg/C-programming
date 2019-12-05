@@ -121,3 +121,19 @@ General linear list를 이용하여 매장고객의 고객등록날짜, 이름, 
 →addNode함수를 통하여 NODE의 dataPtr부가 구조체 포인터변수(즉 pCus)를 참조하는 NODE를 추가한다. 결국 새로 생성된 NODE는 그 NODE의 dataPtr부가 고객1의 정보를 저장하고 있는 형태일 것이다.
 →fpData로부터 문자 1개를 읽어왔을 시 그 문자가 엔터이면 위의 while문을 반복하고 또다시 새로운 NODE가 만들어지며 고객2,고객
 3….의 정보를 저장 할 것이다.
+
+# Process(List* list)
+→getChoice함수를 통해 choice를 받는다.(choice는 P,S,Q중
+에 하나로 getChoice함수는 뒤에서 살펴보자!)
+→choice=p: printList함수가 실행되어 “customers.txt”에 저
+장되어 있는 모든 고객정보를 불러온다.(printList에서는
+traverse함수 이용!)
+→choice=S: search함수가 실행되어 날짜8자리수를 입력 받
+고 만약 그 날짜가 텍스트파일 안에 존재하면 구조체 pCus
+에 저장된 원하는 고객 정보(고객등록날짜, 고객이름, 고객
+등급)를 불러온다
+→choice=I: insertCustomers함수가 실행되어 고객정보저장
+날짜와 고객이름, 고객등급을 입력 받은 다음 fprintf를 사
+용하여 “customers.txt”에 세 정보를 저장한다. 즉 새로운
+고객정보를 삽입한다.
+→choice=Q: do-while문이 종료된다.
