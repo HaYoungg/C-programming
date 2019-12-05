@@ -37,30 +37,23 @@ Queue에서는 어떤 data가 들어오면 순서대로 처리된다. 즉, 줄�
 # void processPQ(HEAP* prQueue)
 -option이 ‘e’인 경우
 → 이제 priority heap구조의 작동중심이라 할 수 있는 processPQ함수를 분석해보자!
-→ 조금 있다가 볼 menu()함수를 실행하고 난 return값으로 option변수를 초기화한다. 만약
-option이 ‘e’였다면 getCus()함수를 실행한다. getCus()함수는 새로 삽입할 고객의 이름과 우선순위
-를 입력받고 customer 구조체에 그 값을 저장하여 그 구조체를 반환하는 함수이다.
-→ getCus()함수로부터 새로운 정보가 입력된 customer구조체를 생성하였다. 따라서 numCusomer
-의 값을 1증가시켜주고 입력받은 priority값으로부터 point값을 계산하여 저장한다.( customer-
->point = customer->priority * 1000 + (1000 - numCustomer)) 옆의 계산식을 보면 priority가 클수
-록 point가 크다는 것을 알 수 있다. 또한 만약 priority값이 같을 경우 numCustomer에 따라
-point값이 달라진다. 즉 우선순위가 같을 경우 먼저 줄을 선 사람이 더 큰 point값을 가진다.
+→ 조금 있다가 볼 menu()함수를 실행하고 난 return값으로 option변수를 초기화한다. 만약 option이 ‘e’였다면 getCus()함수를 실행한다. getCus()함수는 새로 삽입할 고객의 이름과 우선순위를 입력받고 customer 구조체에 그 값을 저장하여 그 구조체를 반환하는 함수이다.
+→ getCus()함수로부터 새로운 정보가 입력된 customer구조체를 생성하였다. 따라서 numCusomer의 값을 1증가시켜주고 입력받은 priority값으로부터 point값을 계산하여 저장한다.( customer->point = customer->priority * 1000 + (1000 - numCustomer)) 옆의 계산식을 보면 priority가 클수록 point가 크다는 것을 알 수 있다. 또한 만약 priority값이 같을 경우 numCustomer에 따라 point값이 달라진다. 즉 우선순위가 같을 경우 먼저 줄을 선 사람이 더 큰 point값을 가진다.
 → 정보가 잘 저장되었는지 확인하기 위해서 저장된 정보를 출력하는 printf()함수를 써보았다.
-→ 고객이름(name), 우선순위(priority), point가 저장된 customer구조체를 heap에 삽입해보자.
-heapInsert(HEAP* heap, void* dataPtr)함수를 통해 prQueue HEAP구조체 포인터에 customer 구조
-체 포인터가 저장된다. 즉 heap->heapAry[heap->last]=dataPtr 문장을 통해 크기가 20인
-heapAry배열의 마지막에 cutomer구조체가 삽입되고, reheapUp을 통하여 point가 큰 고객부터
-heap구조로 배열이 정렬된다.
-→즉 어떤 고객이 먼저 왔더라도(먼저 삽입됐더라도) point가 큰 고객이 먼저 입장하게 된다. 왜냐
-하면 reheapUp을 실행할 때 compareCus가 실행되는데, 이때 point값으로 배열들을 비교하기 때
-문이다.
-→만약 heapInsert가 제대로 안이루어져 false를 반환했다면, 에러가 났다는 메시지와 함께
-eixt(101)로 코드를 종료한다.
+→ 고객이름(name), 우선순위(priority), point가 저장된 customer구조체를 heap에 삽입해보자. heapInsert(HEAP* heap, void* dataPtr)함수를 통해 prQueue HEAP구조체 포인터에 customer 구조체 포인터가 저장된다. 즉 heap->heapAry[heap->last]=dataPtr 문장을 통해 크기가 20인 heapAry배열의 마지막에 cutomer구조체가 삽입되고, reheapUp을 통하여 point가 큰 고객부터 heap구조로 배열이 정렬된다.
+→즉 어떤 고객이 먼저 왔더라도(먼저 삽입됐더라도) point가 큰 고객이 먼저 입장하게 된다. 왜냐하면 reheapUp을 실행할 때 compareCus가 실행되는데, 이때 point값으로 배열들을 비교하기 때문이다.
+→만약 heapInsert가 제대로 안이루어져 false를 반환했다면, 에러가 났다는 메시지와 함께 eixt(101)로 코드를 종료한다.
 
 -option이 ‘d’인 경우
-→option값이 ‘d’이면 heapDelete함수가 실행된다. point크기순으로 정렬된 heapAry에서 root값이
-(point 값이 가장큰) 삭제된다.
+→option값이 ‘d’이면 heapDelete함수가 실행된다. point크기순으로 정렬된 heapAry에서 root값이 (point 값이 가장큰) 삭제된다.
 →delete가 제대로 이루어지지 않으면, 에러메시지를 출력한다.
-→만약 delete가 제대로 실행됐다면, 삭제된 customer 이름을 출력하면서 삭제가 잘 되었는지 확
-인한다. 그런 후 numCustomer수를 1감소시킨다.
+→만약 delete가 제대로 실행됐다면, 삭제된 customer 이름을 출력하면서 삭제가 잘 되었는지 확인한다. 그런 후 numCustomer수를 1감소시킨다.
 →option이 ‘q’이면 do-while반복문을 종료한다.
+
+# char menu()
+→menu()함수는 return 값으로 opiton을 반환한다. option값이 ‘e’, ‘d’, ‘q’이면 valid 값으로 true를 반환하고 이외의 다른 것 문자이면 다시 입력하라는 메시지와 함께 valid는 false로 반환한다. Do-while 반복문은 while(!valid) 이므로 valid가 true이면 반복문이 종료된다.
+
+#  CUSTOMER* getCus()
+→getCus()는 processPQ에서 option값이 ‘e’일 시 customer구조체에 고객정보를 입력받기 위한 함수이다.
+→CUSTOMER 구조체 포인터를 동적할당 받고 만약 동적할당이 이루어지지 않았으면 overflow가 일어났다는 메시지를 출력한다. 그리고 eixt(200)으로 알고리즘을 종료한다.
+→동적할당이 제대로 이루어졌으면 scanf함수를 통해 고객 이름과 우선순위 정보를 입력받고 customer 포인터 구조체를 반환한다.
