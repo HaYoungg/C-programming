@@ -87,3 +87,8 @@ return bottomStack->dataPtr;
 
 →count 값이 0 또는 1 이 아니면 위의 반복문을 시행한다. i 가 1 에서부터 count 값보다 1 작은 수까지
 반복문이 실행된다. 
+
+5) return bottomStack->dataPtr;
+
+→반복문을 끝내고 난 후 bottomStack 이 참조하는 node 의 dataPtr 을 반환한다.(즉, 스택의 맨
+아랫값을 반환한다.)
