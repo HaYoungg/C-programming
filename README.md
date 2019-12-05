@@ -92,3 +92,32 @@ return bottomStack->dataPtr;
 
 →반복문을 끝내고 난 후 bottomStack 이 참조하는 node 의 dataPtr 을 반환한다.(즉, 스택의 맨
 아랫값을 반환한다.)
+
+# QUEUE
+# circular queue를 이용한 피보나치 수열의 실행
+
+배열 기반 큐는 배열이 분명히 비어 있는 상태임에도 불구하고 rear포인터를 배열의 끝에서 더 이상 오른쪽으로 이동시킬 수 없기 때문에 데이터를 추가할 수 없다. 이러한 문제점을 해결하기 위해 배열의 머리와 끝을 연결한 circular(원형)구조의 queue를 사용한다. 
+→원형 큐에서는 Empty상태와 Full상태를 구별하기 위해 저장공간 하나를 잃는다. 이러한 성질갖는 원형 큐를 이용하여 피보나치 수열을 저장하고(Enqueue) 반환하는(Dequeue) 코드를 살펴보자!
+
+# circularqueueADT.h
+→먼저 circularqueueADT.h에 원형 큐를 실행하기 위한 함수들을 저장해 놓았다. 위의 함수들 중에서 NextPosldx에 의해 원형 큐의 전체적인 틀이 완성된다. 첫번째 if문이 의미하는 것은 만약 현재의 위치(pos)가 100-1과 같으면, 즉 현재 위치가 큐배열의 마지막이라면 0을 반환하고 그렇지 않으면 현재의 위치에서 오른쪽으로 한 칸 이동한 값을 반환한다. NextPosldx함수에 의해 배열의 마지막은 비워두게 되는 원형 queue가 되는 것이다.
+
+# 피보나치 수열 저장하고 반환하기
+→QUEUE구조체 변수 q를 생성하고 QueueInit함수를 통해 q의 front와 rear를 0의 값으로 초기화한다.
+→위의 예시는 for반복문을 거치면 피보나치 수열의 1항부터 19항까지의 수들이 Enqueue를 통해 원형 큐에 값이 저장된다. 여기서 주의해야 할 점은 배열의 크기가 100이므로 저장공간을 하나 잃은 99개의 데이터만이 저장될 수 있다. 따라서 i가 1부터 시작하였으므로 100보다 크면 오류가 발생한다. 만약 for문의 범위가 (int i=1; i<100; i++)이었다면 크기가 100인 원형 큐 배열에서 저장공간을 하나 잃고 가장 많은 데이터(99개)가 저장된다.
+→Enqueue를 통해 피보나치 수열 데이터를 원형 큐에 저장하였다. 이제 Dequeue를 이용하여 원형 큐가 Empty가 아닐 때까지 데이터를 반환한다.
+→system(“PAUSE”);는 visual studio 2017버전을 깔았더니 cmd창이 바로 꺼져서 그것을 방지하기 위해 적어주었다!
+
+# General linear list ADT
+General linear list를 이용하여 매장고객의 고객등록날짜, 이름, 고객등급을 알려주는 프로그램을 작성하였다. 위의 매장고객 정보들을 CUSTOMER구조체의 멤버로 작성하고 buildList함수를 통해 만든 List의 NODE의 dataPtr부가 그 구조체를 참조하게 된다. List가 생성이 되었다면 process함수를 통해 choice에 따라 search함수와 printfList함수, insertCustomer함수가 실행된다. 따라서 미리 고객들의 정보가 저장된 메모장 파일에서 내가 원하는 고객의 정보만(search함수) 얻을 수도 있고 또는 매장전체 고객의 정보(printList함수)를 한번에 얻을 수도 있는 코드를 작성하였다. 또한 추가할 고객정보를 입력하여 효율적인 매장고객 관리 리스트를 작성하였다.
+
+# buildLIst()
+→createList를 통하여 list를 생성한다. 밑의 if문을 통해 list가 정상적으로 생성되었는지 확인한다.
+→헤더파일 <stdio.h>에 미리 저장돼있는 구조체 유형인 FILE*로부터 fpData변수를 생성하고 “customers.txt”파일을 열고 읽기모드로 한다. 마찬가지로 if문을 통해 fpData가 정상적으로 생성되었는지 확인한다. 
+→fscanf를 통해 “customers.txt”파일의 수를 성공적으로 읽어 왔다면, 동적할당을 하여 CUSTOMER 구조체 포인 터변수(pCus)를 생성한다. 마찬가지로 if문을 통해 동적 할당이 제대로 이루어졌는지 확인한다.
+→pCus의 regDate에 아까 fscanf를 통하여 읽은 regDateIn을 삽입한다.
+→fgetc를 통해 fpData에서 문자 1개를 읽어온다. 만약 ‘ ’(띄어쓰기)이면 while문을 통과하고 ‘ ” ’(큰따옴표)이면 while문을 통과한다. 따라서 “customers.txt”파일의 커서는 고객이름 앞에 위치하게 될 것이다.
+→fscanf를 통해 fpData의 문자를 읽어오고 pCus의 name에 저장한다. 마찬가지로 위와 동일한 while문을 반복하여 고객등급을 pCus의 customerRating에 저장한다.
+→addNode함수를 통하여 NODE의 dataPtr부가 구조체 포인터변수(즉 pCus)를 참조하는 NODE를 추가한다. 결국 새로 생성된 NODE는 그 NODE의 dataPtr부가 고객1의 정보를 저장하고 있는 형태일 것이다.
+→fpData로부터 문자 1개를 읽어왔을 시 그 문자가 엔터이면 위의 while문을 반복하고 또다시 새로운 NODE가 만들어지며 고객2,고객
+3….의 정보를 저장 할 것이다.
