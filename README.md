@@ -137,3 +137,24 @@ traverse함수 이용!)
 용하여 “customers.txt”에 세 정보를 저장한다. 즉 새로운
 고객정보를 삽입한다.
 →choice=Q: do-while문이 종료된다.
+
+# getChoice()
+→사용자로부터 문자 하나를 입력 받아 choice
+에 저장한다(scanf ). ClearLineFromReadBuffer함
+수를 사용한 이유는 예를들어 choice로 P를 입
+력하고 엔터를 쳤을 때 printList함수가 실행되
+고나서 자꾸 “Invalid choice, Please try again”문
+장이 떴기 때문이다. 즉 엔터도 문자로 읽어서
+while문장이 실행되고, 엔터가 default값이므로
+오류문구가 뜬 것이다. 따라서
+ClearLineFromReadBuffer함수를 통해 엔터를 받
+을 때까지 입력버퍼에 남아있는 값들을 읽어주
+게 만들어서 정상적으로 코드가 실행되게 하였
+다.
+
+# Main()실행문
+→printfInstr를 통해 이 프로그래밍의 목적을 설명한다.
+→buildList를 통해 “customers.txt”파일로부터 읽은 고객1,고객2,고객3,…..의 정보를 담고있는
+list를 생성한다.
+→process를 통해 사용자로부터 choice문자 하나를 입력 받고 search함수, printfList함수 또는
+insertCustomer함수를 실행하여 고객의 정보를 출력한다.
