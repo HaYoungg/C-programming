@@ -56,3 +56,11 @@ heap구조로 배열이 정렬된다.
 문이다.
 →만약 heapInsert가 제대로 안이루어져 false를 반환했다면, 에러가 났다는 메시지와 함께
 eixt(101)로 코드를 종료한다.
+
+-option이 ‘d’인 경우
+→option값이 ‘d’이면 heapDelete함수가 실행된다. point크기순으로 정렬된 heapAry에서 root값이
+(point 값이 가장큰) 삭제된다.
+→delete가 제대로 이루어지지 않으면, 에러메시지를 출력한다.
+→만약 delete가 제대로 실행됐다면, 삭제된 customer 이름을 출력하면서 삭제가 잘 되었는지 확
+인한다. 그런 후 numCustomer수를 1감소시킨다.
+→option이 ‘q’이면 do-while반복문을 종료한다.
