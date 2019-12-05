@@ -60,16 +60,20 @@ Queue에서는 어떤 data가 들어오면 순서대로 처리된다. 즉, 줄�
 
 # STACK
 
+
 1)STACK_NODE* bottomStack;
+
 →구조체 멤버로 void 포인터 dataPtr 과 자기참조구조체포인터 link 를 가지는 bottomStack
 구조체포인터를 선언한다.
 
 2) if(stack->count == 0)
 return NULL;
+
 →stack 이 참조하는 count 변수의 int 값이 0 이면 bottom 함수는 NULL 을 반환한다.
 
 3) else if (stack->count == 1)
 return stack->top->dataPtr;
+
 →stack 이 참조하는 count 변수의 int 값이 1 이면 stack 이 참조하는 top(즉 첫번째 node)의
 dataPtr(void 형 구조체)을 반환한다.
 
@@ -80,5 +84,6 @@ stack->top = stack->top->link;
 }
 return bottomStack->dataPtr;
 }
+
 →count 값이 0 또는 1 이 아니면 위의 반복문을 시행한다. i 가 1 에서부터 count 값보다 1 작은 수까지
 반복문이 실행된다. 
